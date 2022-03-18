@@ -1,22 +1,38 @@
 import { ApolloServer, gql } from 'apollo-server';
+import GET_PRODUCTS from './data.js';
 
 const typeDefs = gql`
-    type Query {
-        hello: String
+	type Query {
+		products: [Product]
+	}
+
+    type Product {
+        id: ID
+        title: String
+        price: Float
+        description: String
+        category: String
+        image: String
+        rating: Rating
+    }
+
+    type Rating {
+        rate: Float
+        count: Int
     }
 `;
 
 const resolvers = {
     Query: {
-        hello: () => {
-            return "Hello, world!";
+        products: () => {
+            return GET_PRODUCTS;
         }
-    }
-}
+    },
+};
 
 const server = new ApolloServer({
-    typeDefs,
-    resolvers,
+	typeDefs,
+	resolvers,
 });
 
 server.listen().then(({ url: API_URL }) => {
