@@ -54,9 +54,37 @@ const GET_CART = (id) =>
 		.get(`https://fakestoreapi.com/carts?userId=${id}`)
 		.then((response) => response.data);
 
-const ADD_PRODUCTS = (product) =>
+/**
+ * POST, add a new product
+ *
+ * @param {*} product
+ * @returns the id of the new product
+ */
+const ADD_PRODUCT = (product) =>
 	axios
 		.post(`https://fakestoreapi.com/products`, product)
+		.then((response) => console.log(response.data));
+
+/**
+ * PUT, update a product
+ *
+ * @param {*} product
+ * @returns the id of the new product
+ */
+const UPDATE_PRODUCT = (product) =>
+	axios
+		.put(`https://fakestoreapi.com/products/1`, product)
+		.then((response) => console.log(response.data));
+
+/**
+ * DELETE a product
+ * 
+ * @param {*} id 
+ * @returns the deleted product
+ */
+const DELETE_PRODUCT = (id) =>
+	axios
+		.delete(`https://fakestoreapi.com/products/${id}`)
 		.then((response) => console.log(response.data));
 
 export {
@@ -66,5 +94,7 @@ export {
 	GET_CATEGORY,
 	GET_CARTS,
 	GET_CART,
-	ADD_PRODUCTS
+	ADD_PRODUCT,
+	UPDATE_PRODUCT,
+	DELETE_PRODUCT,
 };

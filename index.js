@@ -6,11 +6,13 @@ import {
 	GET_CATEGORY,
 	GET_CARTS,
 	GET_CART,
-	ADD_PRODUCTS,
+	ADD_PRODUCT,
+	UPDATE_PRODUCT,
+	DELETE_PRODUCT
 } from './data.js';
 
 const typeDefs = gql`
-    # Types
+	# Types
 	type Query {
 		products: [Product!]!
 		product(id: ID!): Product!
@@ -20,9 +22,11 @@ const typeDefs = gql`
 		# cart:(id: ID!): [Products!]!
 	}
 
-    type Mutation {
-        addProduct(input: AddProduct!): Product
-    }
+	type Mutation {
+		addProduct(addProductInput: AddProduct!): Product
+		updateProduct(updateProductInput: UpdateProduct!): Product
+		deleteProduct(id: ID!): Product
+	}
 
 	type Product {
 		id: ID!
@@ -51,14 +55,22 @@ const typeDefs = gql`
 		quantity: Int!
 	}
 
-    # Inputs
-    input AddProduct {
-        title: String!
-        price: Float!
-        description: String!
-        image: String!
-        category: String!
-    }
+	# Inputs
+	input AddProduct {
+		title: String!
+		price: Float!
+		description: String!
+		image: String!
+		category: String!
+	}
+
+	input UpdateProduct {
+		title: String!
+		price: Float!
+		description: String!
+		image: String!
+		category: String!
+	}
 `;
 
 const resolvers = {
@@ -86,8 +98,14 @@ const resolvers = {
 	},
 	Mutation: {
 		addProduct: (parent, args) => {
-            return ADD_PRODUCTS(args);
-        }
+			return ADD_PRODUCT(args);
+		},
+		updateProduct: (parent, args) => {
+			return UPDATE_PRODUCT(args);
+		},
+		deleteProduct: (parent, args) => {
+			return DELETE_PRODUCT(args.id);
+		}
 	},
 };
 
