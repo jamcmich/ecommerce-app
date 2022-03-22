@@ -1,4 +1,4 @@
-# ecommerce-app
+# simple REST API with GraphQL and Apollo Server
 
 ### Resources
 API: https://fakestoreapi.com/
